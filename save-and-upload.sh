@@ -8,6 +8,8 @@ PASSWORD=PassWord
 URL=http://192.168.24.74:XXXX/jpg/image.jpg\?resolution=3072x1728
 LOCATION=My room
 FOLDER=/mnt/storage/axis
+REMOTEHOST=user@web.host.example
+REMOTEPATH=/var/www/img/webcam.jpg
 TMPDIR=/tmp
 
 while :
@@ -38,11 +40,11 @@ do
         echo RESIZING IMAGE...
         convert $TMPDIR/$FILE -resize 30% -gravity South -crop 100x70% \
         -pointsize 16 -gravity NorthWest \
-        -fill black -annotate +11+291 "Lungolago di Paradiso $HUMAN" \
-        -fill white -annotate +10+290 "Lungolago di Paradiso $HUMAN" $TMPDIR/$FILE
+        -fill black -annotate +11+291 "$LOCATION  $HUMAN" \
+        -fill white -annotate +10+290 "$LOCATION  $HUMAN" $TMPDIR/$FILE
         # SSH (for upload on remote host)
         echo UPLOADING IMAGE...
-        scp $TMPDIR/$FILE user@web.host.example:~/example/img/webcam.jpg
+        scp $TMPDIR/$FILE $REMOTEHOST:$REMOTEPATH
         # DELETE IMAGE AND WAIT
         echo WAITING...
         sleep 2s
