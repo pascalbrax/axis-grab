@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# saves webcam lungolago images every 4 seconds
+# saves webcam images every ~4 seconds and uploads latest image online.
 # (c) 2021 pascal brax & friedrich b.raile
 
 USER=user
